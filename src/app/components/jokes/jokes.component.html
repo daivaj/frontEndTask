@@ -1,0 +1,76 @@
+<div class="container w-75 p-4 bg-light mt-4 mb-5">
+
+  <div class="form-control text-center">
+    <h1>Fun with Chuck Norris</h1>
+  </div>
+
+  <div class="form-control text-center">
+    <div (click)="toggle()" [hidden]="!firstTime" class="arrows"><img src="assets/up.png"></div>
+    <div (click)="toggle()" [hidden]="firstTime" class="arrows"><img src="assets/down.png"></div>
+  </div>
+
+  <div id="first">
+
+    <div class="form-control text-center">
+      <img [hidden]="!firstTime" src="assets/Chuck-Norris.jpg">
+      <img [hidden]="firstTime" src="assets/Chuck-Norris2.jpg">
+    </div>
+
+    <div class="form-control text-center">
+      <p class="list-group-item list-group-item-success"><span class="loaderClass2" *ngIf="!notRandomLoaded"><div class="loader">Loading...</div></span>{{joke.value}}</p>
+
+      <div class="text-center mt-3">
+
+        <button (click)="getJokes()" class="btn btn-outline-success my-2 my-sm-0" type="submit">
+          Next Joke
+        </button>
+      </div>
+
+    </div>
+  </div>
+
+
+  <!--<div class="container w-70 p-4 bg-light mt-4 mb-5">-->
+    <div class="form-control">
+      <h4 class="text-center">Find your favorite joke by word or word fragment</h4>
+      <form class="form-inline my-2 my-lg-0 justify-content-center">
+
+        <input [formControl]="findInput" class="form-control mr-sm-5" type="search" placeholder="Enter your word" aria-label="Search">
+        <span class="loaderClass" *ngIf="!jokesLoaded"><div class="loader">Loading...</div></span>
+        <button [disabled]="!canSearch()" *ngIf="jokesLoaded" (click)="searchJokes()" class="{{i === this.filterIndex ? 'active' : ''}} btn btn-outline-success my-2 my-sm-0" type="submit">
+          Search
+        </button>
+        {{message}}
+      </form>
+    </div>
+
+    <div class="alert alert-danger" *ngIf="!findInput.valid && findInput.dirty">
+      3 letters must be entered
+    </div>
+
+    <div class="form-control text-center">
+      <h5>{{jokeCategories.length < 2 ? '' : 'Filter by category'}}</h5>
+      <ul class="nav justify-content-center">
+        <ng-container *ngFor="let jokeCategory of jokeCategories; let i = index">
+
+          <li (click)="filter(i)" class="{{i === this.filterIndex ? 'active' : ''}} list-group-item list-group-item-success">
+            {{jokeCategory === null ? 'No category' : jokeCategory}}
+          </li>
+
+        </ng-container>
+      </ul>
+    </div>
+
+    <div class="list-group text-center">
+      <ul class="list-group">
+        <li *ngFor="let joke of data | paginate: {itemsPerPage:5, currentPage: p}" class="list-group-item list-group-item-info">
+          {{joke.value}}
+        </li>
+      </ul>
+      <pagination-controls (pageChange)="p = $event"></pagination-controls>
+    </div>
+
+  <!--</div>-->
+
+</div>
+
