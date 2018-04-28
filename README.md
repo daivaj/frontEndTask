@@ -1,3 +1,6 @@
+FrontEnd užduoties portas atidaromas "ng serve --port=4300" 
+Aplikacija įjungiama nuoroda http://localhost:4300
+
 # FrontEndTask
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 1.7.4.
